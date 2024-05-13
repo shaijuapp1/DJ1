@@ -1,0 +1,17 @@
+
+
+{% extends "DocBase.html" %} {% block title %}Home{% endblock%}
+{% block content%}
+<h1>Doc Details</h1>
+<table class="table table-bordered">
+    <tr>
+        <td>Title</td> <td>{{ mymember.title }}</td>
+    </tr> 
+    <tr> 
+        <td>Content</td><td>{{ mymember.content }}</td>
+    </tr> 
+    
+</table>
+
+<a href="/webdoc">View All</a>
+{% endblock content%}

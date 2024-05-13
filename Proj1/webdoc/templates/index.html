@@ -1,0 +1,52 @@
+
+{% extends "DocBase.html" %} {% block title %}Home{% endblock%}
+{% block content%}
+{% if user.is_authenticated %}
+Welcome {{ user.username }}!
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+<h1>Doc List</h1>
+
+<div ng-app="">
+
+
+
+</div>
+Groups: {{request.user.groups.all.0}}
+
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Content</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for x in mymembers %}
+    <tr>
+    <td>{{ x.id }}</td>
+    <td>{{x.title}}</td>
+    <td>{{ x.content }}</td>
+
+    <td><a href="{% url 'item' x.id %}">View</a></td>
+    <td><a href="{% url 'update' x.id %}">edit</a></td>
+
+    <td><a href="delete/{{ x.id }}">delete</a></td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<p>
+<a href="add/">Add member</a>
+</p> 
+
+{% endblock content%}

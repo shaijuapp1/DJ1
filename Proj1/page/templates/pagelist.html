@@ -1,0 +1,11 @@
+{% extends "pagebase.html" %} {% block title %}Page List{% endblock%}
+{% block content%}
+<h1>Page List</h1>
+<ul>
+    {% for page in pagelist%}
+        <li>
+            <a href="/page/{{page.url}}">{{page.title}}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock%}

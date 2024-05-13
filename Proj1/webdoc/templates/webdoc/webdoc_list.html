@@ -1,0 +1,22 @@
+<h1>CRUD Function Based View Example</h1>  
+ 
+<table border="1">
+    <tr>
+        <td>Title</td>
+        <td>Content</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>   
+    {% for doc in object_list %}  
+    <tr>
+        <td>{{ doc.title }} </td> 
+        <td>{{ doc.content }}  </td>
+        <td><a href="{% url 'webdoc_view' doc.id %}">View</a></td>
+        <td><a href="{% url 'webdoc_edit' doc.id %}">edit</a></td>
+        <td><a href="{% url 'webdoc_delete' doc.id %}">delete</a></td>           
+    </tr>
+    {% endfor %}  
+</table>
+  
+<a href="{% url 'webdoc_new' %}">Add</a> 
