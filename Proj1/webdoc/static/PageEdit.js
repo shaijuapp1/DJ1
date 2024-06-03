@@ -1,6 +1,13 @@
 var pageApp = angular.module("pageApp", []);
+
 pageApp.controller("pageCtrl", function($scope) {
     
+    $scope.init = function(id, title, content){        
+        $scope.itemId = id
+        $scope.title = title
+        $scope.content = "content: " + content
+    }
+
     $scope.ls = [];
     $scope.NewPos = [];
     $scope.edit = {};

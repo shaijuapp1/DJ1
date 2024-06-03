@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
 
-    <script src="PageEdit.js"></script>
+    <script src="/static/PageEdit.js"></script>
 
     <style>
        .bordedCell{
@@ -35,7 +35,7 @@
        }
     </style>
 <body>
-
+    {% verbatim %}
     <div ng-app="pageApp" ng-controller="pageCtrl">
 
         <div class="container">
@@ -66,9 +66,9 @@
                 <div class="col-sm-11 bordedCell">
                     <div class="row">
                         <div ng-repeat="c in s.cl" ng-class="s.colCls">
-                            <p ng-if="c.s != 'List' "  ng-class="c.s" style="margin: 0px ;text-align: {{c.ta}};" >{{c.val}}</p> 
+                            <p ng-if="c.s != 'List' "  ng-class="c.s" style="margin: 0px ;text-align: {{c.ta}};" >++{{c.val}}</p> 
                             <ul ng-if="c.s == 'List' " style="margin: 0px ;">
-                                <li ng-repeat="l in c.lst track by $index" >{{l}}</li>
+                                <li ng-repeat="l in c.lst track by $index" >---{{l}}</li>
                             </ul>
                         </div>
                     </div>
@@ -164,6 +164,5 @@
    
    
     </div>
-
-
+    {% endverbatim %}
 </body>

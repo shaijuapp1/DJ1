@@ -3,4 +3,12 @@
 {% block content%}
 
 <p>About..</p>
+<p>{{test}}</p>
+
+<div>
+    <form method="post" action="/execute/">
+        <textarea name="code" rows="10" cols="50"></textarea><br>
+        <button type="submit">Execute</button>
+    </form>
+</div>
 {% endblock content%}

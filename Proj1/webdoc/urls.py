@@ -15,9 +15,18 @@ urlpatterns = [
 
     path('add/', views.add, name='add'),
     path('add/addrecord/', views.addrecord, name='addrecord'),
+    path('update/', views.update, name='update'),
     path('update/<int:id>', views.update, name='update'),
     path('delete/<int:id>', views.delete, name='delete'),
     path('update/updaterecord/<int:id>', views.updaterecord, name='updaterecord'),
+
+    path('updateJson/<int:id>', views.updateJson, name='updateJson'),
+    path('updateJson/<int:id>', views.updateJson, name='updateJson'),
+
+    path('test/', views.test, name='test'),
+
+
+
 
 
 

@@ -2,6 +2,7 @@ from django.views.generic import ListView , DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView 
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from django.template import loader
 
@@ -73,7 +74,7 @@ def add(request):
      template = loader.get_template('add.html')
      return HttpResponse(template.render({}, request))
 
-@login_required(login_url="/accounts/login/")
+#@login_required(login_url="/accounts/login/")
 def addrecord(request):
      x = request.POST['title']
      y = request.POST['content']
@@ -90,14 +91,19 @@ def delete(request, id):
 
 #https://www.w3schools.com/django/django_update_record.php
 @login_required(login_url="/accounts/login/")
-def update(request, id):
-  mymember = WebDoc.objects.get(id=id)
-  template = loader.get_template('update.html')
-  context = {
-    'mymember': mymember,
-  }
-  return HttpResponse(template.render(context, request))
+def update(request, id=None):
 
+  template = loader.get_template('update.html')
+
+  if id != None:
+    mymember = WebDoc.objects.get(id=id)
+    context = {
+      'mymember': mymember,
+    }
+    return HttpResponse(template.render(context, request))
+  else:
+     return HttpResponse(template.render({}, request))
+  
 @login_required(login_url="/accounts/login/")
 def updaterecord(request, id):
   title = request.POST['title']
@@ -106,4 +112,42 @@ def updaterecord(request, id):
   member.title = title
   member.content = content
   member.save()
-  return HttpResponseRedirect(reverse('index'))
+  return HttpResponseRedirect(reverse('index')) 
+
+
+#Json functions
+
+@login_required(login_url="/accounts/login/")
+def updateJson(request, id=None):
+
+  title = request.POST['title']
+  content = request.POST['content']
+  v = 0
+  if id == None:
+     title = "No Id"
+     item = WebDoc(title =title, content=content)
+     item.save()
+     id = item.id
+  else:
+    member = WebDoc.objects.get(id=id)
+    member.title = title
+    member.content = content
+    member.save()
+    item = WebDoc(title =title, content=content)
+    item.save()
+    
+
+
+  data = {
+    'id': id
+  }
+  response = JsonResponse(data)
+  response.status_code = 200  # Setting a custom status code
+  #response['Custom-Header'] = 'Value'  # Adding a custom header
+  return response
+
+
+def test(request):
+  template = loader.get_template('test.html')
+  return HttpResponse(template.render({}, request))
+     
